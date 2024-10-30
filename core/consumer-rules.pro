@@ -27,7 +27,7 @@
  
 # Prevent R8 from leaving Data object members always null
 -keepclassmembers,allowobfuscation class * {
-@com.google.gson.annotations.SerializedName <fields>;
+  @com.google.gson.annotations.SerializedName <fields>;
 }
  
  
@@ -80,3 +80,8 @@ public *;
  
 # Uncomment for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+
+##---------------Begin: proguard configuration for RxJava ----------
+# Uncomment if you use RxJava
+#-dontwarn java.util.concurrent.Flow*
