@@ -11,6 +11,16 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn com.example.core.data.Resource$Error
+-dontwarn com.example.core.data.Resource$Loading
+-dontwarn com.example.core.data.Resource$Success
+-dontwarn com.example.core.data.Resource
+-dontwarn com.example.core.di.CoreModuleKt
+-dontwarn com.example.core.domain.model.Tourism
+-dontwarn com.example.core.domain.repository.ITourismRepository
+-dontwarn com.example.core.domain.usecase.TourismInteractor
+-dontwarn com.example.core.domain.usecase.TourismUseCase
+-dontwarn com.example.core.ui.TourismAdapter
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
