@@ -13,6 +13,7 @@ android {
         minSdk = 24
 
         buildConfigField("String", "BASE_URL", "\"https://tourism-api.dicoding.dev/\"")
+        buildConfigField("String", "HOSTNAME", "\"tourism-api.dicoding.dev\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

@@ -2,6 +2,7 @@ package com.example.core.di
 
 import androidx.room.Room
 import com.example.core.BuildConfig
+import com.example.core.BuildConfig.HOSTNAME
 import com.example.core.data.TourismRepository
 import com.example.core.data.source.local.LocalDataSource
 import com.example.core.data.source.local.room.TourismDatabase
@@ -11,6 +12,7 @@ import com.example.core.domain.repository.ITourismRepository
 import com.example.core.utils.AppExecutors
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -37,6 +39,12 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
+        val hostname = HOSTNAME
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/+cpj/CwsNK1gB+GXcLuEsgRMS+4FN0sd7qTtivcnxDM=")
+            .add(hostname, "sha256/K7rZOrXHknnsEhUH8nLL4MZkejquUuIvOIr6tCa0rbo=")
+            .add(hostname, "sha256/C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=")
+            .build()
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(
                 if (BuildConfig.DEBUG)
@@ -46,6 +54,7 @@ val networkModule = module {
             ))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
     single {
